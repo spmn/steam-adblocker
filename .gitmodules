@@ -1,0 +1,12 @@
+[submodule "deps/ad-block"]
+	path = deps/ad-block
+	url = https://github.com/brave/ad-block.git
+[submodule "deps/bloom-filter-cpp"]
+	path = deps/bloom-filter-cpp
+	url = https://github.com/bbondy/bloom-filter-cpp.git
+[submodule "deps/hashset-cpp"]
+	path = deps/hashset-cpp
+	url = https://github.com/bbondy/hashset-cpp.git
+[submodule "deps/subhook"]
+	path = deps/subhook
+	url = https://github.com/Zeex/subhook.git

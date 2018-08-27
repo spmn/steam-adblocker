@@ -1,0 +1,56 @@
+image: Visual Studio 2017
+configuration: Release
+platform: x86
+test: off
+
+init:
+- ps: >-
+    if ($env:APPVEYOR_REPO_TAG -eq "true")
+        Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_TAG_NAME.TrimStart("v"))"
+    else
+        Update-AppveyorBuild -Version "dev-$($env:APPVEYOR_REPO_COMMIT.Substring(0, 7))"
+
+before_build:
+- call scripts\download_cef.bat
+
+build:
+  project: steam-adblocker.sln
+  parallel: true
+  verbosity: minimal
+
+after_build:
+- cd build\Release
+- appveyor DownloadFile https://aka.ms/vs/15/release/VC_redist.x86.exe
+- appveyor DownloadFile https://easylist.to/easylist/easylist.txt
+- serializer.exe easylist.txt
+
+- mkdir package
+- mkdir package\steam_files
+- mkdir package\pdb
+- mkdir package\redist
+
+- copy ..\..\scripts\installer.bat package
+- copy serializer.exe package
+- copy urltest.exe package
+- copy easylist.txt package
+- copy version.dll package\steam_files
+- copy ABPFilterParserData.dat package\steam_files
+- copy *.pdb package\pdb
+- copy VC_Redist.x86.exe package\redist
+
+- 7z a "steam-adblocker-%APPVEYOR_BUILD_VERSION%.zip" package\*
+
+artifacts:
+  - path: 'build\Release\steam-adblocker-*.zip'
+  
+#deploy:
+#  release: steam-adblocker-$(APPVEYOR_BUILD_VERSION)
+#  description: '<Put release description here>'
+#  provider: GitHub
+#  auth_token:
+#    secure: 1NBHmphK9sVpmv7TLK2YyLn5dTHg5vG/m1cvBsc1gxnynQQTKXPjNNcVBJAVnMLB
+#  artifact: /build\\Release\\steam-adblocker-.*\.zip/
+#  draft: true
+#  on:
+#    branch: master
+#    appveyor_repo_tag: true
