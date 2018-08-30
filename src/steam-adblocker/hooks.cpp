@@ -1,8 +1,8 @@
 #include <Windows.h>
 
 #include "subhook/subhook.h"
-#include "cef_binary/include/capi/cef_client_capi.h"
-#include "cef_binary/include/capi/cef_parser_capi.h"
+#include "include/capi/cef_client_capi.h"
+#include "include/capi/cef_parser_capi.h"
 
 extern bool is_request_blocked(const char *input, const char *context_domain);
 
@@ -74,17 +74,20 @@ struct _cef_request_handler_t* CEF_CALLBACK get_request_handler__hook(struct _ce
 }
 
 subhook_t cef_browser_host_create_browser_hook;
+int (*cef_browser_host_create_browser__original)(const cef_window_info_t* windowInfo, struct _cef_client_t* client, const cef_string_t* url, const struct _cef_browser_settings_t* settings, struct _cef_request_context_t* request_context);
 int cef_browser_host_create_browser_func(const cef_window_info_t* windowInfo, struct _cef_client_t* client, const cef_string_t* url, const struct _cef_browser_settings_t* settings, struct _cef_request_context_t* request_context)
 {
-	auto *orig_func = reinterpret_cast<decltype(&cef_browser_host_create_browser_func)>(subhook_get_trampoline(cef_browser_host_create_browser_hook));
-
 	if (get_request_handler__original != nullptr && get_request_handler__original != client->get_request_handler)
 		OutputDebugStringW(L"[ADBLOCK] \"get_request_handler__original\" not equal to \"client->get_request_handler\".");
 
 	get_request_handler__original = client->get_request_handler;
 	client->get_request_handler = get_request_handler__hook;
 
-	return orig_func(windowInfo, client, url, settings, request_context);
+	subhook_remove(cef_browser_host_create_browser_hook);
+	auto ret = cef_browser_host_create_browser__original(windowInfo, client, url, settings, request_context);
+	subhook_install(cef_browser_host_create_browser_hook);
+
+	return ret;
 }
 
 bool initialize_hooks()
@@ -102,7 +105,12 @@ bool initialize_hooks()
 		return 0;
 	}
 
+#ifdef _WIN64
+	cef_browser_host_create_browser_hook = subhook_new(func, cef_browser_host_create_browser_func, SUBHOOK_OPTION_64BIT_OFFSET);
+#else
 	cef_browser_host_create_browser_hook = subhook_new(func, cef_browser_host_create_browser_func, (subhook_options_t)0);
+#endif
+	cef_browser_host_create_browser__original = (decltype(cef_browser_host_create_browser__original))func;
 	if (cef_browser_host_create_browser_hook == nullptr)
 	{
 		OutputDebugStringW(L"[ADBLOCK] Can't create \"cef_browser_host_create_browser\" hook.");

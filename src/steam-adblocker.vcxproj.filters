@@ -28,9 +28,4 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="steam-adblocker\exports.def">
-      <Filter>Source Files</Filter>
-    </None>
-  </ItemGroup>
 </Project>

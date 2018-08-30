@@ -1,4 +1,5 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -31,32 +32,58 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "subhook", "deps\subhook.vcx
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EFF8A486-A66B-4178-A7C5-FB6D5BE0B2C7}.Debug|x64.ActiveCfg = Debug|x64
+		{EFF8A486-A66B-4178-A7C5-FB6D5BE0B2C7}.Debug|x64.Build.0 = Debug|x64
 		{EFF8A486-A66B-4178-A7C5-FB6D5BE0B2C7}.Debug|x86.ActiveCfg = Debug|Win32
 		{EFF8A486-A66B-4178-A7C5-FB6D5BE0B2C7}.Debug|x86.Build.0 = Debug|Win32
+		{EFF8A486-A66B-4178-A7C5-FB6D5BE0B2C7}.Release|x64.ActiveCfg = Release|x64
+		{EFF8A486-A66B-4178-A7C5-FB6D5BE0B2C7}.Release|x64.Build.0 = Release|x64
 		{EFF8A486-A66B-4178-A7C5-FB6D5BE0B2C7}.Release|x86.ActiveCfg = Release|Win32
 		{EFF8A486-A66B-4178-A7C5-FB6D5BE0B2C7}.Release|x86.Build.0 = Release|Win32
+		{9480A128-9E05-4BDB-996C-B711EFF48CC8}.Debug|x64.ActiveCfg = Debug|x64
+		{9480A128-9E05-4BDB-996C-B711EFF48CC8}.Debug|x64.Build.0 = Debug|x64
 		{9480A128-9E05-4BDB-996C-B711EFF48CC8}.Debug|x86.ActiveCfg = Debug|Win32
 		{9480A128-9E05-4BDB-996C-B711EFF48CC8}.Debug|x86.Build.0 = Debug|Win32
+		{9480A128-9E05-4BDB-996C-B711EFF48CC8}.Release|x64.ActiveCfg = Release|x64
+		{9480A128-9E05-4BDB-996C-B711EFF48CC8}.Release|x64.Build.0 = Release|x64
 		{9480A128-9E05-4BDB-996C-B711EFF48CC8}.Release|x86.ActiveCfg = Release|Win32
 		{9480A128-9E05-4BDB-996C-B711EFF48CC8}.Release|x86.Build.0 = Release|Win32
+		{9602464F-66B8-4940-86E2-49CFB14D9778}.Debug|x64.ActiveCfg = Debug|x64
+		{9602464F-66B8-4940-86E2-49CFB14D9778}.Debug|x64.Build.0 = Debug|x64
 		{9602464F-66B8-4940-86E2-49CFB14D9778}.Debug|x86.ActiveCfg = Debug|Win32
 		{9602464F-66B8-4940-86E2-49CFB14D9778}.Debug|x86.Build.0 = Debug|Win32
+		{9602464F-66B8-4940-86E2-49CFB14D9778}.Release|x64.ActiveCfg = Release|x64
+		{9602464F-66B8-4940-86E2-49CFB14D9778}.Release|x64.Build.0 = Release|x64
 		{9602464F-66B8-4940-86E2-49CFB14D9778}.Release|x86.ActiveCfg = Release|Win32
 		{9602464F-66B8-4940-86E2-49CFB14D9778}.Release|x86.Build.0 = Release|Win32
+		{8164139D-C844-46D0-88AB-E4E2578144B2}.Debug|x64.ActiveCfg = Debug|x64
+		{8164139D-C844-46D0-88AB-E4E2578144B2}.Debug|x64.Build.0 = Debug|x64
 		{8164139D-C844-46D0-88AB-E4E2578144B2}.Debug|x86.ActiveCfg = Debug|Win32
 		{8164139D-C844-46D0-88AB-E4E2578144B2}.Debug|x86.Build.0 = Debug|Win32
+		{8164139D-C844-46D0-88AB-E4E2578144B2}.Release|x64.ActiveCfg = Release|x64
+		{8164139D-C844-46D0-88AB-E4E2578144B2}.Release|x64.Build.0 = Release|x64
 		{8164139D-C844-46D0-88AB-E4E2578144B2}.Release|x86.ActiveCfg = Release|Win32
 		{8164139D-C844-46D0-88AB-E4E2578144B2}.Release|x86.Build.0 = Release|Win32
+		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}.Debug|x64.ActiveCfg = Debug|x64
+		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}.Debug|x64.Build.0 = Debug|x64
 		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}.Debug|x86.ActiveCfg = Debug|Win32
 		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}.Debug|x86.Build.0 = Debug|Win32
+		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}.Release|x64.ActiveCfg = Release|x64
+		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}.Release|x64.Build.0 = Release|x64
 		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}.Release|x86.ActiveCfg = Release|Win32
 		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}.Release|x86.Build.0 = Release|Win32
+		{7A096FD2-DB19-4104-A72D-3B62AAE39246}.Debug|x64.ActiveCfg = Debug|x64
+		{7A096FD2-DB19-4104-A72D-3B62AAE39246}.Debug|x64.Build.0 = Debug|x64
 		{7A096FD2-DB19-4104-A72D-3B62AAE39246}.Debug|x86.ActiveCfg = Debug|Win32
 		{7A096FD2-DB19-4104-A72D-3B62AAE39246}.Debug|x86.Build.0 = Debug|Win32
+		{7A096FD2-DB19-4104-A72D-3B62AAE39246}.Release|x64.ActiveCfg = Release|x64
+		{7A096FD2-DB19-4104-A72D-3B62AAE39246}.Release|x64.Build.0 = Release|x64
 		{7A096FD2-DB19-4104-A72D-3B62AAE39246}.Release|x86.ActiveCfg = Release|Win32
 		{7A096FD2-DB19-4104-A72D-3B62AAE39246}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection

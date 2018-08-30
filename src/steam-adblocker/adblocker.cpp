@@ -14,7 +14,7 @@ std::vector<char> adblock_filter;
 
 bool get_executable_path(wchar_t *exe_path, size_t size)
 {
-	if (!GetModuleFileNameW(NULL, exe_path, size))
+	if (!GetModuleFileNameW(NULL, exe_path, (DWORD)size))
 		return 0;
 
 	wchar_t *sep = wcsrchr(exe_path, L'\\');
