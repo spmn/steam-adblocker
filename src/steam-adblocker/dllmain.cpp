@@ -27,7 +27,10 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 			}
 			OutputDebugStringW(L"[ADBLOCK] Fully loaded.");
 		}
-		OutputDebugStringW(L"[ADBLOCK] Wrapper only.");
+		else
+		{
+			OutputDebugStringW(L"[ADBLOCK] Wrapper only.");
+		}
 	}
 	return TRUE;
 }
