@@ -106,7 +106,7 @@ bool initialize_hooks()
 	}
 
 #ifdef _WIN64
-	cef_browser_host_create_browser_hook = subhook_new(func, cef_browser_host_create_browser_func, SUBHOOK_OPTION_64BIT_OFFSET);
+	cef_browser_host_create_browser_hook = subhook_new(func, cef_browser_host_create_browser_func, SUBHOOK_64BIT_OFFSET);
 #else
 	cef_browser_host_create_browser_hook = subhook_new(func, cef_browser_host_create_browser_func, (subhook_flags)0);
 #endif
