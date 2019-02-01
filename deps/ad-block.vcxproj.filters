@@ -33,6 +33,9 @@
     <ClCompile Include="ad-block\protocol.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ad-block\context_domain.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ad-block\ad_block_client.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ad-block\protocol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ad-block\context_domain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

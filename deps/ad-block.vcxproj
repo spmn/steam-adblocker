@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ad-block\ad_block_client.cc" />
+    <ClCompile Include="ad-block\context_domain.cc" />
     <ClCompile Include="ad-block\cosmetic_filter.cc" />
     <ClCompile Include="ad-block\filter.cc" />
     <ClCompile Include="ad-block\filter_list.cc" />
@@ -166,6 +167,7 @@
     <ClInclude Include="ad-block\bad_fingerprint.h" />
     <ClInclude Include="ad-block\bad_fingerprints.h" />
     <ClInclude Include="ad-block\base.h" />
+    <ClInclude Include="ad-block\context_domain.h" />
     <ClInclude Include="ad-block\cosmetic_filter.h" />
     <ClInclude Include="ad-block\filter.h" />
     <ClInclude Include="ad-block\filter_list.h" />
