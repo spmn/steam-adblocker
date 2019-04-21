@@ -1,6 +1,6 @@
 @echo off
 
-set CEFBUILD=3.3440.1806.g65046b7
+set CEFBUILD=3.3626.1895.g7001d56
 
 rd /s /q ..\deps\cef_binary
 rd /s /q cef_download
