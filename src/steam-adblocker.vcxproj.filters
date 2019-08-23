@@ -27,5 +27,8 @@
     <ClCompile Include="steam-adblocker\adblocker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="steam-adblocker\utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

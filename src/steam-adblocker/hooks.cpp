@@ -4,7 +4,9 @@
 #include "include/capi/cef_client_capi.h"
 #include "include/capi/cef_parser_capi.h"
 
-extern bool is_request_blocked(const char *input, const char *context_domain);
+bool is_request_blocked(const char *input, const char *context_domain);
+void cef_string_free(cef_string_t* cef_string);
+void cef_urlparts_free(cef_urlparts_t* cef_urlparts);
 
 cef_return_value_t(CEF_CALLBACK* on_before_resource_load__original)(struct _cef_request_handler_t* self, struct _cef_browser_t* browser, struct _cef_frame_t* frame, struct _cef_request_t* request, struct _cef_request_callback_t* callback);
 cef_return_value_t CEF_CALLBACK on_before_resource_load__hook(struct _cef_request_handler_t* self, struct _cef_browser_t* browser, struct _cef_frame_t* frame, struct _cef_request_t* request, struct _cef_request_callback_t* callback)
@@ -32,6 +34,10 @@ cef_return_value_t CEF_CALLBACK on_before_resource_load__hook(struct _cef_reques
 			cef_string_to_utf8(referrer_parts.host.str, referrer_parts.host.length, &referrer_host_utf8);
 
 			block_request = is_request_blocked(url_utf8.str, referrer_host_utf8.str);
+
+			cef_string_free(&url_utf8);
+			cef_string_free(&referrer_host_utf8);
+			cef_urlparts_free(&referrer_parts);
 		}
 
 		if(real_referrer_url)

@@ -170,6 +170,7 @@
     <ClCompile Include="steam-adblocker\dllmain.cpp" />
     <ClCompile Include="steam-adblocker\hooks.cpp" />
     <ClCompile Include="steam-adblocker\wrapper.cpp" />
+    <ClCompile Include="steam-adblocker\utils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

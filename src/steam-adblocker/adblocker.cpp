@@ -6,35 +6,14 @@
 
 #include "ad-block/ad_block_client.h"
 
+bool get_executable_path(wchar_t* exe_path, size_t size);
+bool read_file(const std::wstring& file, std::vector<char>& content);
+
 const wchar_t *ADBLOCKPLUS_FILTER = L"ABPFilterParserData.dat";
 
 AdBlockClient ad_block;
 std::vector<char> adblock_filter;
 
-
-bool get_executable_path(wchar_t *exe_path, size_t size)
-{
-	if (!GetModuleFileNameW(NULL, exe_path, (DWORD)size))
-		return 0;
-
-	wchar_t *sep = wcsrchr(exe_path, L'\\');
-	if (!sep)
-		return 0;
-
-	sep[1] = L'\0';
-	return 1;
-}
-
-bool read_file(const std::wstring& file, std::vector<char>& content)
-{
-	std::ifstream f(file, std::ios::binary);
-	if (!f)
-		return 0;
-
-	std::vector<char> temp((std::istreambuf_iterator<char>(f)), std::istreambuf_iterator<char>());
-	content = temp;
-	return 1;
-}
 
 bool initialize_adblocker()
 {
