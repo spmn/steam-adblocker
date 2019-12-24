@@ -8,8 +8,8 @@ bool is_request_blocked(const char *input, const char *context_domain);
 void cef_string_free(cef_string_t* cef_string);
 void cef_urlparts_free(cef_urlparts_t* cef_urlparts);
 
-cef_return_value_t(CEF_CALLBACK* on_before_resource_load__original)(struct _cef_request_handler_t* self, struct _cef_browser_t* browser, struct _cef_frame_t* frame, struct _cef_request_t* request, struct _cef_request_callback_t* callback);
-cef_return_value_t CEF_CALLBACK on_before_resource_load__hook(struct _cef_request_handler_t* self, struct _cef_browser_t* browser, struct _cef_frame_t* frame, struct _cef_request_t* request, struct _cef_request_callback_t* callback)
+cef_return_value_t(CEF_CALLBACK* on_before_resource_load__original)(struct _cef_resource_request_handler_t* self, struct _cef_browser_t* browser, struct _cef_frame_t* frame, struct _cef_request_t* request, struct _cef_request_callback_t* callback);
+cef_return_value_t CEF_CALLBACK on_before_resource_load__hook(struct _cef_resource_request_handler_t* self, struct _cef_browser_t* browser, struct _cef_frame_t* frame, struct _cef_request_t* request, struct _cef_request_callback_t* callback)
 {
 	bool block_request = false;
 	cef_string_userfree_t url = request->get_url(request);
@@ -55,6 +55,30 @@ cef_return_value_t CEF_CALLBACK on_before_resource_load__hook(struct _cef_reques
 	return RV_CONTINUE;
 }
 
+struct _cef_resource_request_handler_t*(CEF_CALLBACK* get_resource_request_handler__original)(struct _cef_request_handler_t* self, struct _cef_browser_t* browser, struct _cef_frame_t* frame, struct _cef_request_t* request, int is_navigation, int is_download, const cef_string_t* request_initiator, int* disable_default_handling);
+struct _cef_resource_request_handler_t* CEF_CALLBACK get_resource_request_handler__hook(struct _cef_request_handler_t* self, struct _cef_browser_t* browser, struct _cef_frame_t* frame, struct _cef_request_t* request, int is_navigation, int is_download, const cef_string_t* request_initiator, int* disable_default_handling)
+{
+	_cef_resource_request_handler_t* ret;
+
+	if (get_resource_request_handler__original)
+	{
+		ret = get_resource_request_handler__original(self, browser, frame, request, is_navigation, is_download, request_initiator, disable_default_handling);
+
+		if (on_before_resource_load__original != nullptr && on_before_resource_load__original != ret->on_before_resource_load)
+			OutputDebugStringW(L"[ADBLOCK] \"on_before_resource_load__original\" not equal to \"ret->on_before_resource_load\".");
+
+		on_before_resource_load__original = ret->on_before_resource_load;
+		ret->on_before_resource_load = on_before_resource_load__hook;
+	}
+	else
+	{
+		OutputDebugStringW(L"[ADBLOCK] \"get_resource_request_handler__original\" is null.");
+		ret = nullptr;
+	}
+
+	return ret;
+}
+
 struct _cef_request_handler_t*(CEF_CALLBACK* get_request_handler__original)(struct _cef_client_t* self);
 struct _cef_request_handler_t* CEF_CALLBACK get_request_handler__hook(struct _cef_client_t* self)
 {
@@ -64,11 +88,11 @@ struct _cef_request_handler_t* CEF_CALLBACK get_request_handler__hook(struct _ce
 	{
 		ret = get_request_handler__original(self);
 
-		if (on_before_resource_load__original != nullptr && on_before_resource_load__original != ret->on_before_resource_load)
-			OutputDebugStringW(L"[ADBLOCK] \"on_before_resource_load__original\" not equal to \"ret->on_before_resource_load\".");
+		if (get_resource_request_handler__original != nullptr && get_resource_request_handler__original != ret->get_resource_request_handler)
+			OutputDebugStringW(L"[ADBLOCK] \"get_resource_request_handler__original\" not equal to \"ret->get_resource_request_handler\".");
 
-		on_before_resource_load__original = ret->on_before_resource_load;
-		ret->on_before_resource_load = on_before_resource_load__hook;
+		get_resource_request_handler__original = ret->get_resource_request_handler;
+		ret->get_resource_request_handler = get_resource_request_handler__hook;
 	}
 	else 
 	{
@@ -80,8 +104,8 @@ struct _cef_request_handler_t* CEF_CALLBACK get_request_handler__hook(struct _ce
 }
 
 subhook_t cef_browser_host_create_browser_hook;
-int (*cef_browser_host_create_browser__original)(const cef_window_info_t* windowInfo, struct _cef_client_t* client, const cef_string_t* url, const struct _cef_browser_settings_t* settings, struct _cef_request_context_t* request_context);
-int cef_browser_host_create_browser_func(const cef_window_info_t* windowInfo, struct _cef_client_t* client, const cef_string_t* url, const struct _cef_browser_settings_t* settings, struct _cef_request_context_t* request_context)
+int (*cef_browser_host_create_browser__original)(const cef_window_info_t* windowInfo, struct _cef_client_t* client, const cef_string_t* url, const struct _cef_browser_settings_t* settings, struct _cef_dictionary_value_t* extra_info, struct _cef_request_context_t* request_context);
+int cef_browser_host_create_browser_func(const cef_window_info_t* windowInfo, struct _cef_client_t* client, const cef_string_t* url, const struct _cef_browser_settings_t* settings, struct _cef_dictionary_value_t* extra_info, struct _cef_request_context_t* request_context)
 {
 	if (get_request_handler__original != nullptr && get_request_handler__original != client->get_request_handler)
 		OutputDebugStringW(L"[ADBLOCK] \"get_request_handler__original\" not equal to \"client->get_request_handler\".");
@@ -90,7 +114,7 @@ int cef_browser_host_create_browser_func(const cef_window_info_t* windowInfo, st
 	client->get_request_handler = get_request_handler__hook;
 
 	subhook_remove(cef_browser_host_create_browser_hook);
-	auto ret = cef_browser_host_create_browser__original(windowInfo, client, url, settings, request_context);
+	auto ret = cef_browser_host_create_browser__original(windowInfo, client, url, settings, extra_info, request_context);
 	subhook_install(cef_browser_host_create_browser_hook);
 
 	return ret;
