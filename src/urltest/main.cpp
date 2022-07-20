@@ -2,7 +2,7 @@
 #include <fstream>
 #include <vector>
 
-#include "ad-block/ad_block_client.h"
+#include "adblock_rust_ffi/src/wrapper.h"
 
 const char *ADBLOCKPLUS_FILTER = "ABPFilterParserData.dat";
 
@@ -21,6 +21,13 @@ bool read_file(const std::string& file, std::vector<char>& content)
 	std::vector<char> temp((std::istreambuf_iterator<char>(f)), std::istreambuf_iterator<char>());
 	content = temp;
 	return 1;
+}
+
+void domain_resolver(const char* domain, uint32_t* start, uint32_t* end)
+{
+    std::cout << "Resolve domain: " << domain << std::endl;
+    *start = 0;
+    *end = 0;
 }
 
 int main(int argc, char *argv[])
@@ -43,13 +50,20 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	AdBlockClient client;
-	client.deserialize(&content[0]);
+    adblock::SetDomainResolver(domain_resolver);
 
-	if (client.matches(url, FONoFilterOption, referrer))
-		std::cout << "Request blocked" << std::endl;
-	else
-		std::cout << "Request not blocked" << std::endl;
+    auto engine = adblock::Engine();
+    if (!engine.deserialize(content))
+    {
+        std::cout << "Can't deserialize file: " << ADBLOCKPLUS_FILTER << std::endl;
+        return 1;
+    }
 
+    bool did_match_rule{}, did_match_exception{}, did_match_important{};
+    engine.matches(url, "", "", false, "", &did_match_rule, &did_match_exception, &did_match_important, nullptr);
+
+    std::cout << "did_match_rule=" << did_match_rule << std::endl;;
+    std::cout << "did_match_exception=" << did_match_exception << std::endl;;
+    std::cout << "did_match_important=" << did_match_important << std::endl;;
 	return 0;
 }

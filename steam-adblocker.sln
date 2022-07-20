@@ -9,8 +9,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "steam-adblocker", "src\stea
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "serializer", "src\serializer.vcxproj", "{9480A128-9E05-4BDB-996C-B711EFF48CC8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E222D04A-6FD6-4AB7-A615-5FCD680EA0C9} = {E222D04A-6FD6-4AB7-A615-5FCD680EA0C9}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "urltest", "src\urltest.vcxproj", "{9602464F-66B8-4940-86E2-49CFB14D9778}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E222D04A-6FD6-4AB7-A615-5FCD680EA0C9} = {E222D04A-6FD6-4AB7-A615-5FCD680EA0C9}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deps", "deps", "{D63A0D9E-C6F7-4925-97FE-98E3DC1E4855}"
 EndProject
