@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deps", "deps", "{D63A0D9E-C
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "subhook", "deps\subhook.vcxproj", "{7A096FD2-DB19-4104-A72D-3B62AAE39246}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "adblock_rust_ffi", "deps\adblock_rust_ffi.vcxproj", "{E222D04A-6FD6-4AB7-A615-5FCD680EA0C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -56,12 +58,21 @@ Global
 		{7A096FD2-DB19-4104-A72D-3B62AAE39246}.Release|x64.Build.0 = Release|x64
 		{7A096FD2-DB19-4104-A72D-3B62AAE39246}.Release|x86.ActiveCfg = Release|Win32
 		{7A096FD2-DB19-4104-A72D-3B62AAE39246}.Release|x86.Build.0 = Release|Win32
+		{E222D04A-6FD6-4AB7-A615-5FCD680EA0C9}.Debug|x64.ActiveCfg = Debug|x64
+		{E222D04A-6FD6-4AB7-A615-5FCD680EA0C9}.Debug|x64.Build.0 = Debug|x64
+		{E222D04A-6FD6-4AB7-A615-5FCD680EA0C9}.Debug|x86.ActiveCfg = Debug|Win32
+		{E222D04A-6FD6-4AB7-A615-5FCD680EA0C9}.Debug|x86.Build.0 = Debug|Win32
+		{E222D04A-6FD6-4AB7-A615-5FCD680EA0C9}.Release|x64.ActiveCfg = Release|x64
+		{E222D04A-6FD6-4AB7-A615-5FCD680EA0C9}.Release|x64.Build.0 = Release|x64
+		{E222D04A-6FD6-4AB7-A615-5FCD680EA0C9}.Release|x86.ActiveCfg = Release|Win32
+		{E222D04A-6FD6-4AB7-A615-5FCD680EA0C9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7A096FD2-DB19-4104-A72D-3B62AAE39246} = {D63A0D9E-C6F7-4925-97FE-98E3DC1E4855}
+		{E222D04A-6FD6-4AB7-A615-5FCD680EA0C9} = {D63A0D9E-C6F7-4925-97FE-98E3DC1E4855}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1AE269F2-F3F0-479F-AFB5-6CB4DB5B62BD}

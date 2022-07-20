@@ -10,9 +10,7 @@
 #include <string>
 #include <utility>
 #include <vector>
-
-#include "base/memory/raw_ptr.h"
-#include "third_party/abseil-cpp/absl/types/optional.h"
+#include <optional>
 
 extern "C" {
 #include "lib.h"  // NOLINT
@@ -74,8 +72,8 @@ typedef ADBLOCK_EXPORT struct FilterListMetadata {
   explicit FilterListMetadata(C_FilterListMetadata* metadata);
   ~FilterListMetadata();
 
-  absl::optional<std::string> homepage;
-  absl::optional<std::string> title;
+  std::optional<std::string> homepage;
+  std::optional<std::string> title;
 
   FilterListMetadata(FilterListMetadata&&);
 
@@ -122,7 +120,7 @@ class ADBLOCK_EXPORT Engine {
  private:
   Engine(const Engine&) = delete;
   void operator=(const Engine&) = delete;
-  raw_ptr<C_Engine> raw = nullptr;
+  C_Engine* raw = nullptr;
 };
 
 std::pair<FilterListMetadata, std::unique_ptr<Engine>> engineWithMetadata(

@@ -46,12 +46,12 @@ FilterListMetadata::FilterListMetadata(C_FilterListMetadata* metadata) {
   char* str_buffer;
 
   if (filter_list_metadata_homepage(metadata, &str_buffer)) {
-    homepage = absl::make_optional(std::string(str_buffer));
+    homepage = std::string(str_buffer);
     c_char_buffer_destroy(str_buffer);
   }
 
   if (filter_list_metadata_title(metadata, &str_buffer)) {
-    title = absl::make_optional(std::string(str_buffer));
+    title = std::string(str_buffer);
     c_char_buffer_destroy(str_buffer);
   }
 }
