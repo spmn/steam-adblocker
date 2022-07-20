@@ -9,6 +9,13 @@ use std::ffi::CString;
 use std::os::raw::c_char;
 use std::string::String;
 
+/// Struct used to represent a Buffer coming from the Rust world. Must be freed.
+#[repr(C)]
+pub struct CBuffer {
+    data: *mut c_char,
+    len: size_t,
+}
+
 /// An external callback that receives a hostname and two out-parameters for start and end
 /// position. The callback should fill the start and end positions with the start and end indices
 /// of the domain part of the hostname.
@@ -250,6 +257,27 @@ pub unsafe extern "C" fn engine_remove_tag(engine: *mut Engine, tag: *const c_ch
     engine.disable_tags(&[tag]);
 }
 
+/// Serializes a data file list. Must destroy the returned CBuffer by calling cbuffer_destroy on it
+#[no_mangle]
+pub unsafe extern "C" fn engine_serialize_raw(
+    engine: *mut Engine,
+) -> CBuffer {
+    assert!(!engine.is_null());
+    let engine = Box::leak(Box::from_raw(engine));
+    let mut data = engine.serialize_raw().unwrap_or_else(|_| {
+        eprintln!("Error serializing adblock engine");
+        vec![]
+    });
+
+    let buf = CBuffer {
+        data: data.as_mut_ptr() as _,
+        len: data.len() as _,
+    };
+
+    std::mem::forget(data);
+    buf
+}
+
 /// Deserializes a previously serialized data file list.
 #[no_mangle]
 pub unsafe extern "C" fn engine_deserialize(
@@ -272,6 +300,16 @@ pub unsafe extern "C" fn engine_deserialize(
 pub unsafe extern "C" fn engine_destroy(engine: *mut Engine) {
     if !engine.is_null() {
         drop(Box::from_raw(engine));
+    }
+}
+
+/// Destroy a `CBuffer` once you are done with it.
+#[no_mangle]
+pub unsafe extern "C" fn cbuffer_destroy(buffer: CBuffer) {
+    if !buffer.data.is_null() {
+        let s = std::slice::from_raw_parts_mut(buffer.data, buffer.len as usize);
+        let s = s.as_mut_ptr();
+        Box::from_raw(s);
     }
 }
 

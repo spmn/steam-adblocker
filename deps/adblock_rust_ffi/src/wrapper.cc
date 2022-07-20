@@ -126,6 +126,17 @@ std::string Engine::getCspDirectives(const std::string& url,
   return csp;
 }
 
+std::vector<char> Engine::serialize_raw() {
+    auto buffer = engine_serialize_raw(raw);
+    auto vec = std::vector<char>(buffer.data, buffer.data + buffer.len);
+    cbuffer_destroy(buffer);
+    return vec;
+}
+
+bool Engine::deserialize(const std::vector<char>& data) {
+    return engine_deserialize(raw, data.data(), data.size());
+}
+
 bool Engine::deserialize(const char* data, size_t data_size) {
   return engine_deserialize(raw, data, data_size);
 }
