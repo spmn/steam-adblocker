@@ -1,32 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2042
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "steam-adblocker", "src\steam-adblocker.vcxproj", "{EFF8A486-A66B-4178-A7C5-FB6D5BE0B2C7}"
 	ProjectSection(ProjectDependencies) = postProject
-		{8164139D-C844-46D0-88AB-E4E2578144B2} = {8164139D-C844-46D0-88AB-E4E2578144B2}
 		{7A096FD2-DB19-4104-A72D-3B62AAE39246} = {7A096FD2-DB19-4104-A72D-3B62AAE39246}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "serializer", "src\serializer.vcxproj", "{9480A128-9E05-4BDB-996C-B711EFF48CC8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{8164139D-C844-46D0-88AB-E4E2578144B2} = {8164139D-C844-46D0-88AB-E4E2578144B2}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "urltest", "src\urltest.vcxproj", "{9602464F-66B8-4940-86E2-49CFB14D9778}"
-	ProjectSection(ProjectDependencies) = postProject
-		{8164139D-C844-46D0-88AB-E4E2578144B2} = {8164139D-C844-46D0-88AB-E4E2578144B2}
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deps", "deps", "{D63A0D9E-C6F7-4925-97FE-98E3DC1E4855}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ad-block", "deps\ad-block.vcxproj", "{8164139D-C844-46D0-88AB-E4E2578144B2}"
-	ProjectSection(ProjectDependencies) = postProject
-		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB} = {6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bloom-filter-cpp", "deps\bloom-filter-cpp.vcxproj", "{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "subhook", "deps\subhook.vcxproj", "{7A096FD2-DB19-4104-A72D-3B62AAE39246}"
 EndProject
@@ -62,22 +48,6 @@ Global
 		{9602464F-66B8-4940-86E2-49CFB14D9778}.Release|x64.Build.0 = Release|x64
 		{9602464F-66B8-4940-86E2-49CFB14D9778}.Release|x86.ActiveCfg = Release|Win32
 		{9602464F-66B8-4940-86E2-49CFB14D9778}.Release|x86.Build.0 = Release|Win32
-		{8164139D-C844-46D0-88AB-E4E2578144B2}.Debug|x64.ActiveCfg = Debug|x64
-		{8164139D-C844-46D0-88AB-E4E2578144B2}.Debug|x64.Build.0 = Debug|x64
-		{8164139D-C844-46D0-88AB-E4E2578144B2}.Debug|x86.ActiveCfg = Debug|Win32
-		{8164139D-C844-46D0-88AB-E4E2578144B2}.Debug|x86.Build.0 = Debug|Win32
-		{8164139D-C844-46D0-88AB-E4E2578144B2}.Release|x64.ActiveCfg = Release|x64
-		{8164139D-C844-46D0-88AB-E4E2578144B2}.Release|x64.Build.0 = Release|x64
-		{8164139D-C844-46D0-88AB-E4E2578144B2}.Release|x86.ActiveCfg = Release|Win32
-		{8164139D-C844-46D0-88AB-E4E2578144B2}.Release|x86.Build.0 = Release|Win32
-		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}.Debug|x64.ActiveCfg = Debug|x64
-		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}.Debug|x64.Build.0 = Debug|x64
-		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}.Debug|x86.ActiveCfg = Debug|Win32
-		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}.Debug|x86.Build.0 = Debug|Win32
-		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}.Release|x64.ActiveCfg = Release|x64
-		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}.Release|x64.Build.0 = Release|x64
-		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}.Release|x86.ActiveCfg = Release|Win32
-		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB}.Release|x86.Build.0 = Release|Win32
 		{7A096FD2-DB19-4104-A72D-3B62AAE39246}.Debug|x64.ActiveCfg = Debug|x64
 		{7A096FD2-DB19-4104-A72D-3B62AAE39246}.Debug|x64.Build.0 = Debug|x64
 		{7A096FD2-DB19-4104-A72D-3B62AAE39246}.Debug|x86.ActiveCfg = Debug|Win32
@@ -91,8 +61,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{8164139D-C844-46D0-88AB-E4E2578144B2} = {D63A0D9E-C6F7-4925-97FE-98E3DC1E4855}
-		{6D0D9244-8E9F-4007-A1E6-11E09E4A96BB} = {D63A0D9E-C6F7-4925-97FE-98E3DC1E4855}
 		{7A096FD2-DB19-4104-A72D-3B62AAE39246} = {D63A0D9E-C6F7-4925-97FE-98E3DC1E4855}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
