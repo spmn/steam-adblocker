@@ -23,13 +23,6 @@ bool read_file(const std::string& file, std::vector<char>& content)
 	return 1;
 }
 
-void domain_resolver(const char* domain, uint32_t* start, uint32_t* end)
-{
-    std::cout << "Resolve domain: " << domain << std::endl;
-    *start = 0;
-    *end = 0;
-}
-
 int main(int argc, char *argv[])
 {
 	if (argc < 2)
@@ -49,8 +42,6 @@ int main(int argc, char *argv[])
 		std::cout << "Can't read file: " << ADBLOCKPLUS_FILTER << std::endl;
 		return 1;
 	}
-
-    adblock::SetDomainResolver(domain_resolver);
 
     auto engine = adblock::Engine();
     if (!engine.deserialize(content))

@@ -16,43 +16,6 @@ pub struct CBuffer {
     len: size_t,
 }
 
-/// An external callback that receives a hostname and two out-parameters for start and end
-/// position. The callback should fill the start and end positions with the start and end indices
-/// of the domain part of the hostname.
-pub type DomainResolverCallback = unsafe extern "C" fn(*const c_char, *mut u32, *mut u32);
-
-/// Passes a callback to the adblock library, allowing it to be used for domain resolution.
-///
-/// This is required to be able to use any adblocking functionality.
-///
-/// Returns true on success, false if a callback was already set previously.
-#[no_mangle]
-pub unsafe extern "C" fn set_domain_resolver(resolver: DomainResolverCallback) -> bool {
-    struct RemoteResolverImpl {
-        remote_callback: DomainResolverCallback,
-    }
-
-    impl adblock::url_parser::ResolvesDomain for RemoteResolverImpl {
-        fn get_host_domain(&self, host: &str) -> (usize, usize) {
-            let mut start: u32 = 0;
-            let mut end: u32 = 0;
-            let host_c_str = CString::new(host).expect("Error: CString::new()");
-            let remote_callback = self.remote_callback;
-
-            unsafe {
-                remote_callback(host_c_str.as_ptr(), &mut start as *mut u32, &mut end as *mut u32);
-            }
-
-            (start as usize, end as usize)
-        }
-    }
-
-    adblock::url_parser::set_domain_resolver(Box::new(RemoteResolverImpl {
-        remote_callback: resolver,
-    }))
-    .is_ok()
-}
-
 /// Create a new `Engine`, interpreting `data` as a C string and then parsing as a filter list in
 /// ABP syntax.
 #[no_mangle]

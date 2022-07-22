@@ -36,10 +36,6 @@ extern "C" {
 
 namespace adblock {
 
-typedef C_DomainResolverCallback DomainResolverCallback;
-
-bool ADBLOCK_EXPORT SetDomainResolver(DomainResolverCallback resolver);
-
 class ADBLOCK_EXPORT FilterList {
  public:
   FilterList(const std::string& uuid,
