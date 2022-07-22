@@ -90,19 +90,20 @@ Engine::Engine(const char* data, size_t data_size)
 void Engine::matches(const std::string& url,
                      const std::string& host,
                      const std::string& tab_host,
-                     bool is_third_party,
                      const std::string& resource_type,
-                     bool* did_match_rule,
-                     bool* did_match_exception,
-                     bool* did_match_important,
-                     std::string* redirect) {
+                     bool& did_match_rule,
+                     bool& did_match_exception,
+                     bool& did_match_important,
+                     std::optional<bool> is_third_party,
+                     std::optional<std::reference_wrapper<std::string>> redirect) {
+  const bool* is_third_party_ptr = is_third_party.has_value() ? &*is_third_party : nullptr;
   char* redirect_char_ptr = nullptr;
-  engine_match(raw, url.c_str(), host.c_str(), tab_host.c_str(), is_third_party,
-               resource_type.c_str(), did_match_rule, did_match_exception,
-               did_match_important, &redirect_char_ptr);
+  engine_match(raw, url.c_str(), host.c_str(), tab_host.c_str(), is_third_party_ptr,
+               resource_type.c_str(), &did_match_rule, &did_match_exception,
+               &did_match_important, &redirect_char_ptr);
   if (redirect_char_ptr) {
-    if (redirect) {
-      *redirect = redirect_char_ptr;
+    if (redirect.has_value()) {
+      redirect->get() = redirect_char_ptr;
     }
     c_char_buffer_destroy(redirect_char_ptr);
   }

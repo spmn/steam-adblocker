@@ -94,7 +94,7 @@ pub unsafe extern "C" fn engine_match(
     url: *const c_char,
     host: *const c_char,
     tab_host: *const c_char,
-    third_party: bool,
+    third_party: *const bool,
     resource_type: *const c_char,
     did_match_rule: *mut bool,
     did_match_exception: *mut bool,
@@ -107,12 +107,13 @@ pub unsafe extern "C" fn engine_match(
     let resource_type = CStr::from_ptr(resource_type).to_str().unwrap();
     assert!(!engine.is_null());
     let engine = Box::leak(Box::from_raw(engine));
+    let third_party = if third_party.is_null() { None } else { Some(*third_party) };
     let blocker_result = engine.check_network_urls_with_hostnames_subset(
         url,
         host,
         tab_host,
         resource_type,
-        Some(third_party),
+        third_party,
         // Checking normal rules is skipped if a normal rule or exception rule was found previously
         *did_match_rule || *did_match_exception,
         // Always check exceptions unless one was found previously

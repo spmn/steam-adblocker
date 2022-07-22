@@ -85,12 +85,12 @@ class ADBLOCK_EXPORT Engine {
   void matches(const std::string& url,
                const std::string& host,
                const std::string& tab_host,
-               bool is_third_party,
                const std::string& resource_type,
-               bool* did_match_rule,
-               bool* did_match_exception,
-               bool* did_match_important,
-               std::string* redirect);
+               bool& did_match_rule,
+               bool& did_match_exception,
+               bool& did_match_important,
+               std::optional<bool> is_third_party = std::nullopt,
+               std::optional<std::reference_wrapper<std::string>> redirect = std::nullopt);
   std::string getCspDirectives(const std::string& url,
                                const std::string& host,
                                const std::string& tab_host,
