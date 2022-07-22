@@ -11,44 +11,48 @@ void cef_urlparts_free(cef_urlparts_t* cef_urlparts);
 cef_return_value_t(CEF_CALLBACK* on_before_resource_load__original)(struct _cef_resource_request_handler_t* self, struct _cef_browser_t* browser, struct _cef_frame_t* frame, struct _cef_request_t* request, struct _cef_request_callback_t* callback);
 cef_return_value_t CEF_CALLBACK on_before_resource_load__hook(struct _cef_resource_request_handler_t* self, struct _cef_browser_t* browser, struct _cef_frame_t* frame, struct _cef_request_t* request, struct _cef_request_callback_t* callback)
 {
-	bool block_request = false;
 	cef_string_userfree_t url = request->get_url(request);
 	if (url) 
 	{
+        bool block_request = false;
         cef_urlparts_t url_parts = {};
 		if (cef_parse_url(url, &url_parts))
 		{
-            cef_string_userfree_t real_referrer_url = request->get_referrer_url(request);
-
-            cef_string_t *referrer_url;
-            cef_urlparts_t referrer_parts = {};
-
-            if (real_referrer_url)
-                referrer_url = real_referrer_url;
-            else
-                referrer_url = url;
-
-            if (cef_parse_url(referrer_url, &referrer_parts))
+            if (url_parts.host.str != nullptr)
             {
-                cef_string_utf8_t url_utf8 = {};
-                cef_string_utf8_t url_host_utf8 = {};
-                cef_string_utf8_t referrer_host_utf8 = {};
+                cef_string_userfree_t real_referrer_url = request->get_referrer_url(request);
 
-                cef_string_to_utf8(url->str, url->length, &url_utf8);
-                cef_string_to_utf8(url_parts.host.str, url_parts.host.length, &url_host_utf8);
-                cef_string_to_utf8(referrer_parts.host.str, referrer_parts.host.length, &referrer_host_utf8);
+                cef_string_t *referrer_url;
+                cef_urlparts_t referrer_parts = {};
 
-                block_request = is_request_blocked(url_utf8.str, url_host_utf8.str, referrer_host_utf8.str, request->get_resource_type(request));
+                if (real_referrer_url)
+                    referrer_url = real_referrer_url;
+                else
+                    referrer_url = url;
 
-                cef_string_free(&url_utf8);
-                cef_string_free(&url_host_utf8);
-                cef_string_free(&referrer_host_utf8);
-                cef_urlparts_free(&referrer_parts);
+                if (cef_parse_url(referrer_url, &referrer_parts))
+                {
+                    cef_string_utf8_t url_utf8 = {};
+                    cef_string_utf8_t url_host_utf8 = {};
+                    cef_string_utf8_t referrer_host_utf8 = {};
+
+                    cef_string_to_utf8(url->str, url->length, &url_utf8);
+                    cef_string_to_utf8(url_parts.host.str, url_parts.host.length, &url_host_utf8);
+                    cef_string_to_utf8(referrer_parts.host.str, referrer_parts.host.length, &referrer_host_utf8);
+
+                    block_request = is_request_blocked(url_utf8.str, url_host_utf8.str, referrer_host_utf8.str, request->get_resource_type(request));
+
+                    cef_string_free(&url_utf8);
+                    cef_string_free(&url_host_utf8);
+                    cef_string_free(&referrer_host_utf8);
+                    cef_urlparts_free(&referrer_parts);
+                }
+
+                if(real_referrer_url)
+                    cef_string_userfree_free(real_referrer_url);
             }
-            cef_urlparts_free(&url_parts);
 
-            if(real_referrer_url)
-                cef_string_userfree_free(real_referrer_url);
+            cef_urlparts_free(&url_parts);
 		}
 
 		cef_string_userfree_free(url);
@@ -74,7 +78,7 @@ struct _cef_resource_request_handler_t* CEF_CALLBACK get_resource_request_handle
 
 		if (on_before_resource_load__original != nullptr && on_before_resource_load__original != ret->on_before_resource_load)
 			OutputDebugStringW(L"[ADBLOCK] \"on_before_resource_load__original\" not equal to \"ret->on_before_resource_load\".");
-
+        
 		on_before_resource_load__original = ret->on_before_resource_load;
 		ret->on_before_resource_load = on_before_resource_load__hook;
 	}
@@ -98,7 +102,7 @@ struct _cef_request_handler_t* CEF_CALLBACK get_request_handler__hook(struct _ce
 
 		if (get_resource_request_handler__original != nullptr && get_resource_request_handler__original != ret->get_resource_request_handler)
 			OutputDebugStringW(L"[ADBLOCK] \"get_resource_request_handler__original\" not equal to \"ret->get_resource_request_handler\".");
-
+        
 		get_resource_request_handler__original = ret->get_resource_request_handler;
 		ret->get_resource_request_handler = get_resource_request_handler__hook;
 	}
