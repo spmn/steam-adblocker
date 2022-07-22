@@ -2,7 +2,7 @@
 
 setlocal enabledelayedexpansion
 
-set CEFBUILD=79.0.10+ge866a07+chromium-79.0.3945.88
+set CEFBUILD=84.4.1+gfdc7504+chromium-84.0.4147.105
 set CEFBUILD_ESCAPED=!CEFBUILD:+=%%2B!
 
 rd /s /q ..\deps\cef_binary
