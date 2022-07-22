@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "steam-adblocker", "src\steam-adblocker.vcxproj", "{EFF8A486-A66B-4178-A7C5-FB6D5BE0B2C7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7A096FD2-DB19-4104-A72D-3B62AAE39246} = {7A096FD2-DB19-4104-A72D-3B62AAE39246}
+		{E222D04A-6FD6-4AB7-A615-5FCD680EA0C9} = {E222D04A-6FD6-4AB7-A615-5FCD680EA0C9}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "serializer", "src\serializer.vcxproj", "{9480A128-9E05-4BDB-996C-B711EFF48CC8}"
