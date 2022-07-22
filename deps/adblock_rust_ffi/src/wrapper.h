@@ -96,7 +96,7 @@ class ADBLOCK_EXPORT Engine {
                                const std::string& tab_host,
                                bool is_third_party,
                                const std::string& resource_type);
-  std::vector<char> serialize_raw();
+  std::optional<std::vector<char>> serialize_raw();
   bool deserialize(const std::vector<char>& data);
   bool deserialize(const char* data, size_t data_size);
   void addTag(const std::string& tag);

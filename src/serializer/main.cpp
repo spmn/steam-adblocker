@@ -56,7 +56,13 @@ int main(int argc, char *argv[])
 
 	std::cout << "Serializing..." << std::endl;
     auto data = engine.serialize_raw();
-	if (!write_file(DUMP_TO, data))
+    if (!data)
+    {
+        std::cout << "Can't serialize file: " << argv[1] << std::endl;
+        return 1;
+    }
+
+	if (!write_file(DUMP_TO, *data))
 	{
 		std::cout << "Can't write file: " << DUMP_TO << std::endl;
 		return 1;

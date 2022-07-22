@@ -224,21 +224,24 @@ pub unsafe extern "C" fn engine_remove_tag(engine: *mut Engine, tag: *const c_ch
 #[no_mangle]
 pub unsafe extern "C" fn engine_serialize_raw(
     engine: *mut Engine,
-) -> CBuffer {
+    buffer: *mut CBuffer
+) -> bool {
     assert!(!engine.is_null());
+    assert!(!buffer.is_null());
     let engine = Box::leak(Box::from_raw(engine));
-    let mut data = engine.serialize_raw().unwrap_or_else(|_| {
+    let serialized = engine.serialize_raw();
+    if serialized.is_ok() {
+        let mut data = serialized.unwrap();
+        (*buffer).data = data.as_mut_ptr() as _;
+        (*buffer).len = data.len() as _;
+
+        std::mem::forget(data);
+        true
+    }
+    else {
         eprintln!("Error serializing adblock engine");
-        vec![]
-    });
-
-    let buf = CBuffer {
-        data: data.as_mut_ptr() as _,
-        len: data.len() as _,
-    };
-
-    std::mem::forget(data);
-    buf
+        false
+    }
 }
 
 /// Deserializes a previously serialized data file list.
@@ -268,9 +271,9 @@ pub unsafe extern "C" fn engine_destroy(engine: *mut Engine) {
 
 /// Destroy a `CBuffer` once you are done with it.
 #[no_mangle]
-pub unsafe extern "C" fn cbuffer_destroy(buffer: CBuffer) {
-    if !buffer.data.is_null() {
-        let s = std::slice::from_raw_parts_mut(buffer.data, buffer.len as usize);
+pub unsafe extern "C" fn cbuffer_destroy(buffer: *mut CBuffer) {
+    if !buffer.is_null() && !(*buffer).data.is_null() {
+        let s = std::slice::from_raw_parts_mut((*buffer).data, (*buffer).len as usize);
         let s = s.as_mut_ptr();
         Box::from_raw(s);
     }
