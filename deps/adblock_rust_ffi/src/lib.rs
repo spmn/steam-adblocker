@@ -141,17 +141,18 @@ pub unsafe extern "C" fn engine_get_csp_directives(
     url: *const c_char,
     host: *const c_char,
     tab_host: *const c_char,
-    third_party: bool,
+    third_party: *const bool,
     resource_type: *const c_char,
 ) -> *mut c_char {
     let url = CStr::from_ptr(url).to_str().unwrap();
     let host = CStr::from_ptr(host).to_str().unwrap();
     let tab_host = CStr::from_ptr(tab_host).to_str().unwrap();
+    let third_party = if third_party.is_null() { None } else { Some(*third_party) };
     let resource_type = CStr::from_ptr(resource_type).to_str().unwrap();
     assert!(!engine.is_null());
     let engine = Box::leak(Box::from_raw(engine));
     if let Some(directive) =
-        engine.get_csp_directives(url, host, tab_host, resource_type, Some(third_party))
+        engine.get_csp_directives(url, host, tab_host, resource_type, third_party)
     {
         CString::new(directive).expect("Error: CString::new()").into_raw()
     } else {

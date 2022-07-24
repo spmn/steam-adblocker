@@ -112,10 +112,11 @@ void Engine::matches(const std::string& url,
 std::string Engine::getCspDirectives(const std::string& url,
                                      const std::string& host,
                                      const std::string& tab_host,
-                                     bool is_third_party,
-                                     const std::string& resource_type) {
+                                     const std::string& resource_type,
+                                     std::optional<bool> is_third_party) {
+  const bool* is_third_party_ptr = is_third_party.has_value() ? &*is_third_party : nullptr;
   char* csp_raw = engine_get_csp_directives(raw, url.c_str(), host.c_str(),
-                                            tab_host.c_str(), is_third_party,
+                                            tab_host.c_str(), is_third_party_ptr,
                                             resource_type.c_str());
   const std::string csp = std::string(csp_raw);
 

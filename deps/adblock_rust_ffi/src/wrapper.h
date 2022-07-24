@@ -94,8 +94,8 @@ class ADBLOCK_EXPORT Engine {
   std::string getCspDirectives(const std::string& url,
                                const std::string& host,
                                const std::string& tab_host,
-                               bool is_third_party,
-                               const std::string& resource_type);
+                               const std::string& resource_type,
+                               std::optional<bool> is_third_party = std::nullopt);
   std::optional<std::vector<char>> serialize_raw();
   bool deserialize(const std::vector<char>& data);
   bool deserialize(const char* data, size_t data_size);
