@@ -4,9 +4,9 @@
 #include "include/capi/cef_client_capi.h"
 #include "include/capi/cef_parser_capi.h"
 
+#include "utils.h"
+
 bool is_request_blocked(const char *url, const char *url_host, const char *referrer_host, cef_resource_type_t request_type);
-void cef_string_free(cef_string_t* cef_string);
-void cef_urlparts_free(cef_urlparts_t* cef_urlparts);
 
 cef_return_value_t(CEF_CALLBACK* on_before_resource_load__original)(struct _cef_resource_request_handler_t* self, struct _cef_browser_t* browser, struct _cef_frame_t* frame, struct _cef_request_t* request, struct _cef_request_callback_t* callback);
 cef_return_value_t CEF_CALLBACK on_before_resource_load__hook(struct _cef_resource_request_handler_t* self, struct _cef_browser_t* browser, struct _cef_frame_t* frame, struct _cef_request_t* request, struct _cef_request_callback_t* callback)

@@ -7,8 +7,7 @@
 #include "include/internal/cef_types.h"
 #include "adblock_rust_ffi/src/wrapper.h"
 
-bool get_executable_path(wchar_t* exe_path, size_t size);
-bool read_file(const std::wstring& file, std::vector<char>& content);
+#include "utils.h"
 
 const wchar_t *ADBLOCKPLUS_FILTER = L"ABPFilterParserData.dat";
 

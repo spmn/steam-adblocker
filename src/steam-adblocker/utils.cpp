@@ -1,10 +1,8 @@
 #include <Windows.h>
-
-#include <string>
 #include <fstream>
-#include <vector>
-
 #include "include/capi/cef_base_capi.h"
+
+#include "utils.h"
 
 bool get_executable_path(wchar_t* exe_path, size_t size)
 {
@@ -28,14 +26,6 @@ bool read_file(const std::wstring& file, std::vector<char>& content)
 	std::vector<char> temp((std::istreambuf_iterator<char>(f)), std::istreambuf_iterator<char>());
 	content = temp;
 	return 1;
-}
-
-void cef_string_free(cef_string_t* cef_string)
-{
-	if (cef_string && cef_string->str && cef_string->dtor)
-	{
-		cef_string->dtor(cef_string->str);
-	}
 }
 
 void cef_urlparts_free(cef_urlparts_t* cef_urlparts)
