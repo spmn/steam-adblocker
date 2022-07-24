@@ -72,13 +72,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IntDir>$(SolutionDir)build\$(Platform)\Temp\$(ProjectName)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)deps\;$(SolutionDir)deps\cef_binary\$(Platform)\;</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(SolutionDir)build\$(Platform)\$(Configuration)\lib\;$(SolutionDir)deps\cef_binary\$(Platform)\Release\;</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)deps\;$(SolutionDir)deps\cef_binary\;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(SolutionDir)build\$(Platform)\$(Configuration)\lib\;$(SolutionDir)deps\cef_binary\Release\$(Platform)\;</LibraryPath>
     <TargetName>version</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)deps\;$(SolutionDir)deps\cef_binary\$(Platform)\;</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(SolutionDir)build\$(Platform)\$(Configuration)\lib\;$(SolutionDir)deps\cef_binary\$(Platform)\Release\;</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)deps\;$(SolutionDir)deps\cef_binary\;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(SolutionDir)build\$(Platform)\$(Configuration)\lib\;$(SolutionDir)deps\cef_binary\Release\$(Platform)\;</LibraryPath>
     <TargetName>version</TargetName>
     <IntDir>$(SolutionDir)build\$(Platform)\Temp\$(ProjectName)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</OutDir>
@@ -86,13 +86,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IntDir>$(SolutionDir)build\$(Platform)\Temp\$(ProjectName)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)deps\;$(SolutionDir)deps\cef_binary\$(Platform)\;</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(SolutionDir)build\$(Platform)\$(Configuration)\lib\;$(SolutionDir)deps\cef_binary\$(Platform)\Release\;</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)deps\;$(SolutionDir)deps\cef_binary\;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(SolutionDir)build\$(Platform)\$(Configuration)\lib\;$(SolutionDir)deps\cef_binary\Release\$(Platform)\;</LibraryPath>
     <TargetName>version</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)deps\;$(SolutionDir)deps\cef_binary\$(Platform)\;</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(SolutionDir)build\$(Platform)\$(Configuration)\lib\;$(SolutionDir)deps\cef_binary\$(Platform)\Release\;</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)deps\;$(SolutionDir)deps\cef_binary\;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(SolutionDir)build\$(Platform)\$(Configuration)\lib\;$(SolutionDir)deps\cef_binary\Release\$(Platform)\;</LibraryPath>
     <TargetName>version</TargetName>
     <IntDir>$(SolutionDir)build\$(Platform)\Temp\$(ProjectName)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</OutDir>
