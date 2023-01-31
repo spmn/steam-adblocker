@@ -2,7 +2,6 @@
 
 bool initialize_wrapper();
 bool initialize_hooks();
-bool initialize_adblocker();
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
@@ -18,11 +17,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
             if (!initialize_hooks())
             {
                 OutputDebugStringW(L"[ADBLOCK] Can't initialize hooks.");
-                return TRUE;
-            }
-            if (!initialize_adblocker())
-            {
-                OutputDebugStringW(L"[ADBLOCK] Can't initialize adblocker.");
                 return TRUE;
             }
             OutputDebugStringW(L"[ADBLOCK] Fully loaded.");
